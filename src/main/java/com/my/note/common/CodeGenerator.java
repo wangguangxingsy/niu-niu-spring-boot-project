@@ -8,7 +8,9 @@ import com.baomidou.mybatisplus.generator.config.StrategyConfig;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
 
 /**
- * @Author：wangguangxing
+ * 代码自己生成工具
+ *
+ * @Author：勇敢牛牛
  * @Date：2024-11-30 14:33
  * @Description：
  */
@@ -28,17 +30,13 @@ public class CodeGenerator {
         // 全局配置
         GlobalConfig gc = new GlobalConfig();
         gc.setOutputDir("src/main/java");
-        gc.setAuthor("勇敢牛牛");
+        gc.setAuthor("wangguangxing");
         gc.setOpen(false);
         mpg.setGlobalConfig(gc);
 
         // 包配置
         PackageConfig pc = new PackageConfig();
-        pc.setParent("com.my.note.area");
-        pc.setEntity("entity");
-        pc.setMapper("mapper");
-        pc.setService("service");
-        pc.setController("controller");
+        pc.setParent("com.my.note.activity");
         mpg.setPackageInfo(pc);
 
         // 策略配置
