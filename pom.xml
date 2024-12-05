@@ -69,6 +69,15 @@
         </dependency>
     </dependencies>
     <build>
+        <resources>
+            <!-- 可以将不需要打进来的文件排除，引用线上配置-->
+            <resource>
+                <directory>src/main/resources</directory>
+                <excludes>
+                    <exclude>**/*.properties</exclude>
+                </excludes>
+            </resource>
+        </resources>
         <plugins>
             <!--可执行 JAR/WAR 打包需求：如果要将 Spring Boot 项目打包成可执行的 JAR 文件或者 WAR 文件 -->
             <plugin>

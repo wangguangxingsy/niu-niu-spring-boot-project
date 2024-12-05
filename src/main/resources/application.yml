@@ -14,10 +14,10 @@ spring:
     # 如果Redis设置了密码，添加如下配置
     password: redis@1234
 
-#配置服务端口及上下文
+
 server:
-  port: 8086
   servlet:
     context-path: /note
+  port: 8086
 
 
