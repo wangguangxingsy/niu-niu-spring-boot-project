@@ -30,7 +30,7 @@ public class Azx12Controller {
     private AreaCodeUtil areaCodeUtil;
 
     /**
-     * 国统一区划代码工具类（最后面层级不变）
+     * 全国统一区划代码工具类（最后面层级不变）
      *
      * @param level 0：中国-省-市-区-街道-社区
      *              1：省-市-区-街道-社区
@@ -71,9 +71,11 @@ public class Azx12Controller {
     @GetMapping("/parseAreasByProvince")
     public AreaCodeResDTO parseAreasByProvince(@RequestParam String areaCode) {
         AreaCodeResDTO result = new AreaCodeResDTO();
+        //先获取省市两级区划
         AreaCodeResDTO areaCodeResDTO = areaCodeUtil.parseAreasFrontByLevel(2);
         if (null != areaCodeResDTO) {
             areaCodeResDTO.getChildren().stream().forEach(e -> {
+                //获取areaCode对象
                 if (areaCode.equals(e.getValue())) {
                     BeanUtils.copyProperties(e, result);
                 }

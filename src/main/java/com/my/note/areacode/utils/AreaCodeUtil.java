@@ -74,25 +74,6 @@ public class AreaCodeUtil {
     }
 
     /**
-     * 递归查找指定层级节点的方法
-     *
-     * @param azx12
-     * @param level
-     * @param targetLevelCategories
-     */
-    private void findNodesByLevel(Azx12 azx12, int level, List<Azx12> targetLevelCategories) {
-        if (level == azx12.getLevel()) {
-            targetLevelCategories.add(azx12);
-        }
-        List<Azx12> children = azx12.getChildren();
-        if (null != children) {
-            for (Azx12 item : children) {
-                findNodesByLevel(item, level, targetLevelCategories);
-            }
-        }
-    }
-
-    /**
      * 全国行政区划代码（最前面层级不变） 处理工具类
      *
      * @param level 层级
@@ -133,6 +114,26 @@ public class AreaCodeUtil {
         nationLevelDTO.setChildren(nationLevelArray);
         return nationLevelDTO;
     }
+
+    /**
+     * 递归查找指定层级节点的方法
+     *
+     * @param azx12
+     * @param level
+     * @param targetLevelCategories
+     */
+    private void findNodesByLevel(Azx12 azx12, int level, List<Azx12> targetLevelCategories) {
+        if (level == azx12.getLevel()) {
+            targetLevelCategories.add(azx12);
+        }
+        List<Azx12> children = azx12.getChildren();
+        if (null != children) {
+            for (Azx12 item : children) {
+                findNodesByLevel(item, level, targetLevelCategories);
+            }
+        }
+    }
+
 
     /**
      * 根据行政区划尾数判断层级
