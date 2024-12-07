@@ -1,8 +1,11 @@
-package com.my.note.area.entity;
+package com.my.note.areacode.entity;
 
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableField;
+
 import java.io.Serializable;
+import java.util.List;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
@@ -22,11 +25,12 @@ public class Azx12 implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+
     /**
      * 行政区划代码
      */
     @TableId("ID")
-    private String id;
+    private String value;
 
     /**
      * 父节点ID
@@ -41,52 +45,16 @@ public class Azx12 implements Serializable {
     private String label;
 
     /**
-     * 行政区划全称
+     * 子节点
      */
-    @TableField("FULLLABEL")
-    private String fulllabel;
-
-    /**
-     * 是否叶子节点
-     */
-    @TableField("ISLEAF")
-    private String isleaf;
-
-    /**
-     * 拼音码
-     */
-    @TableField("SPELL")
-    private String spell;
-
-    /**
-     * 是否常用
-     */
-    @TableField("ISCOMMON")
-    private String iscommon;
-
-    /**
-     * 排列顺序
-     */
-    @TableField("ORDNUMBER")
-    private String ordnumber;
+    @TableField(exist = false)
+    private List<Azx12> children;
 
     /**
      * 层级
      */
-    @TableField("FLOOR")
-    private String floor;
-
-    /**
-     * 国家标准行政区划代码
-     */
-    @TableField("STATEID")
-    private String stateid;
-
-    /**
-     * 国家标准行政区划名称
-     */
-    @TableField("STATELABEL")
-    private String statelabel;
+    @TableField(exist = false)
+    private int level;
 
 
 }
