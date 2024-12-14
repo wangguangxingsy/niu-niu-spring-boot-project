@@ -3,6 +3,7 @@ package com.my.note.areacode.dto;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -10,7 +11,9 @@ import java.util.List;
  */
 
 @Data
-public class AreaCodeResDTO {
+public class AreaCodeResDTO implements Serializable {
+
+    private static final long serialVersionUID = 1L; // 建议定义一个版本号，便于版本兼容控制
 
     @ApiModelProperty(value = "市/区/街道级区划ID", required = true)
     private String value;

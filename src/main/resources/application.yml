@@ -1,13 +1,13 @@
 spring:
   profiles:
     active: dev
-# 配置数据库信息
+  # 配置数据库信息
   datasource:
     url: jdbc:mysql://localhost:3306/spring-boot-note?connectTimeout=1000&socketTimeout=3000&autoReconnect=true&useSSL=false&&serverTimezone=GMT%2B8
     username: root
     password: root@1234
     driver-class-name: com.mysql.cj.jdbc.Driver
-# 配置redis缓存信息
+  # 配置redis缓存信息
   redis:
     host: 127.0.0.1
     port: 6379
@@ -15,9 +15,13 @@ spring:
     password: redis@1234
 
 
+# 设置服务上下文及端口
 server:
   servlet:
     context-path: /note
   port: 8080
 
-
+#redis配置
+note:
+  redis:
+    namespace: note

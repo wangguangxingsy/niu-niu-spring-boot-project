@@ -36,7 +36,7 @@ public class CodeGenerator {
 
         // 包配置
         PackageConfig pc = new PackageConfig();
-        pc.setParent("com.my.note.activity");
+        pc.setParent("com.my.note.psninfo");
         mpg.setPackageInfo(pc);
 
         // 策略配置
@@ -45,7 +45,7 @@ public class CodeGenerator {
         strategy.setColumnNaming(NamingStrategy.underline_to_camel);
         strategy.setEntityLombokModel(true);
         strategy.setRestControllerStyle(true);
-        strategy.setInclude("azx12");
+        strategy.setInclude("psn_info_b");
         mpg.setStrategy(strategy);
 
         mpg.execute();
