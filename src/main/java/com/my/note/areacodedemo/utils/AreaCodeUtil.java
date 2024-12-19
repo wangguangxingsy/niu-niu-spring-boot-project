@@ -1,8 +1,8 @@
-package com.my.note.areacode.utils;
+package com.my.note.areacodedemo.utils;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.my.note.areacode.dto.AreaCodeResDTO;
-import com.my.note.areacode.entity.Azx12;
+import com.my.note.areacodedemo.dto.AreaCodeResDTO;
+import com.my.note.areacodedemo.entity.Azx12;
 import com.my.note.mapper.Azx12Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

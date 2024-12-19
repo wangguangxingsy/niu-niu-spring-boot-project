@@ -21,7 +21,7 @@
 ## 附：redisUtil
 
 ```java
-package com.my.note.redisprac.utils;
+package com.my.note.redisdemo.utils;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -128,13 +128,13 @@ public class RedisUtil {
 ## 附：测试用例说明
 
 ```java
-package com.my.note.redisprac.controller;
+package com.my.note.redisdemo.controller;
 
-import com.my.note.areacode.dto.AreaCodeResDTO;
-import com.my.note.areacode.entity.Azx12;
-import com.my.note.areacode.utils.AreaCodeUtil;
+import com.my.note.areacodedemo.dto.AreaCodeResDTO;
+import com.my.note.areacodedemo.entity.Azx12;
+import com.my.note.areacodedemo.utils.AreaCodeUtil;
 import com.my.note.common.CommonResponse;
-import com.my.note.redisprac.utils.RedisUtil;
+import com.my.note.redisdemo.utils.RedisUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.RedisTemplate;

@@ -1,9 +1,9 @@
-package com.my.note.areacode.controller;
+package com.my.note.areacodedemo.controller;
 
 
-import com.my.note.areacode.dto.AreaCodeResDTO;
-import com.my.note.areacode.entity.Azx12;
-import com.my.note.areacode.utils.AreaCodeUtil;
+import com.my.note.areacodedemo.dto.AreaCodeResDTO;
+import com.my.note.areacodedemo.entity.Azx12;
+import com.my.note.areacodedemo.utils.AreaCodeUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;

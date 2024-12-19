@@ -1,4 +1,4 @@
-package com.my.note.areacode.entity;
+package com.my.note.areacodedemo.entity;
 
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableField;

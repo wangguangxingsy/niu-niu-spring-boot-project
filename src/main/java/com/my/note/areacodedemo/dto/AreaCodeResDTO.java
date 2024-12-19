@@ -1,4 +1,4 @@
-package com.my.note.areacode.dto;
+package com.my.note.areacodedemo.dto;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;

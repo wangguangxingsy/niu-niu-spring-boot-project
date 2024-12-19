@@ -1,6 +1,6 @@
-package com.my.note.areacode.service;
+package com.my.note.areacodedemo.service;
 
-import com.my.note.areacode.entity.Azx12;
+import com.my.note.areacodedemo.entity.Azx12;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**

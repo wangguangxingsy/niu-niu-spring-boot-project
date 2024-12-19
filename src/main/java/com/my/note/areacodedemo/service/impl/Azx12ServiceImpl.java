@@ -1,8 +1,8 @@
-package com.my.note.areacode.service.impl;
+package com.my.note.areacodedemo.service.impl;
 
-import com.my.note.areacode.entity.Azx12;
+import com.my.note.areacodedemo.entity.Azx12;
 import com.my.note.mapper.Azx12Mapper;
-import com.my.note.areacode.service.IAzx12Service;
+import com.my.note.areacodedemo.service.IAzx12Service;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
