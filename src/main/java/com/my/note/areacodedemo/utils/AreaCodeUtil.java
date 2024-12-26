@@ -294,4 +294,47 @@ public class AreaCodeUtil {
         }
         return commLevelArray;
     }
+
+
+    /**
+     * 递归查找父id，并组成新的Azx12（id、parentid、label）
+     *
+     * @return
+     */
+    public static List<Azx12> findParentNode(Azx12 azx12) {
+        List<Azx12> parentResultList = new ArrayList<>();
+        if (null != azx12 && !azx12.getChildren().isEmpty()) {
+            for (Azx12 item : azx12.getChildren()) {
+                //递归调用，匹配父id
+                findParentId(item, parentResultList);
+            }
+        }
+        return parentResultList;
+    }
+
+    /**
+     * 递归查找父节点，并组成新的Azx12（id、parentid、label）
+     *
+     * @param azx12
+     * @return
+     */
+    private static List<Azx12> findParentId(Azx12 azx12, List<Azx12> parentResultList) {
+        List<Azx12> children = azx12.getChildren();
+        if (null != children) {
+            for (Azx12 item : children) {
+                Azx12 result = new Azx12();
+                //父id
+                result.setParentid(azx12.getValue());
+                //id
+                result.setValue(item.getValue());
+                //label
+                result.setLabel(item.getLabel());
+                //放到新集合
+                parentResultList.add(result);
+                //递归调用
+                findParentId(item, parentResultList);
+            }
+        }
+        return parentResultList;
+    }
 }

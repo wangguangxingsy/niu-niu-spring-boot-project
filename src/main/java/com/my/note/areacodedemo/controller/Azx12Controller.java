@@ -1,9 +1,12 @@
 package com.my.note.areacodedemo.controller;
 
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.my.note.areacodedemo.dto.AreaCodeResDTO;
 import com.my.note.areacodedemo.entity.Azx12;
 import com.my.note.areacodedemo.utils.AreaCodeUtil;
+import com.my.note.filedemo.FileUtil;
+import com.my.note.mapper.Azx12Mapper;
 import com.my.note.psninfodemo.PsnInfoUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +32,9 @@ public class Azx12Controller {
 
     @Autowired
     private AreaCodeUtil areaCodeUtil;
+
+    @Autowired
+    private Azx12Mapper azx12Mapper;
 
     /**
      * 全国统一区划代码工具类（最后面层级不变）
@@ -85,13 +91,35 @@ public class Azx12Controller {
         return result;
     }
 
-    @Autowired
-    private PsnInfoUtil psnInfoUtil;
 
-
-    @GetMapping("/queryAgeRange")
-    public List<?> queryAgeRange() {
-        return psnInfoUtil.queryAgeRange();
+    /**
+     * 将辽宁省行政区划的json文件，保存到数据库中
+     *
+     * @return
+     */
+    @GetMapping("/insertAzx12")
+    public int insertAzx12() {
+        //将行政区划的json文件转为Azx12类
+        Azx12 azx12 = FileUtil.fileToAzx12();
+        //递归查找父id，并组成新的Azx12（id、parentid、label）
+        List<Azx12> parentIdList = AreaCodeUtil.findParentNode(azx12);
+        for (Azx12 e : azx12.getChildren()) {
+            //添加第二层父级信息
+            e.setParentid(azx12.getValue());
+            parentIdList.add(e);
+        }
+        int total = 0;
+        for (Azx12 item : parentIdList) {
+            LambdaQueryWrapper<Azx12> wrapper = new LambdaQueryWrapper<>();
+            wrapper.eq(Azx12::getValue, item.getValue());
+            Integer count = azx12Mapper.selectCount(wrapper);
+            if (count == 0) {
+                //库里不存在，进行新增
+                int a = azx12Mapper.insert(item);
+                total += a;
+            }
+        }
+        return total;
     }
 }
 

@@ -2,6 +2,7 @@ package com.my.note.filedemo;
 
 
 import com.alibaba.fastjson.JSONObject;
+import com.my.note.areacodedemo.entity.Azx12;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -32,6 +33,22 @@ public class FileUtil {
         return map;
     }
 
+
+    /**
+     * 将行政区划的json文件转为Azx12
+     *
+     * @return
+     */
+    public static Azx12 fileToAzx12() {
+        //读取行政区划json文件
+        InputStream inputStream = FileUtil.class.getClassLoader().getResourceAsStream("mock/areaCode.json");
+        String str = new BufferedReader(new InputStreamReader(inputStream))
+                .lines()
+                .collect(Collectors.joining(System.lineSeparator()));
+        //转换为Azx12类
+        Azx12 azx12 = JSONObject.parseObject(str, Azx12.class);
+        return azx12;
+    }
 
     public static void main(String[] args) {
         HashMap<String, String> map = fileToMap();
