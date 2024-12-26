@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.my.note.mapper.PsnInfoMapper">
+
+    <!-- 查询年龄区间分布数据-->
+    <select id="queryAgeRange" resultType="com.my.note.psninfodemo.dto.AgeRangeDO">
+        SELECT
+        CASE
+        WHEN
+        SEC = '1' THEN
+        '20岁以下'
+        WHEN SEC = '2' THEN
+        '20-30岁'
+        WHEN SEC = '3' THEN
+        '30-40岁'
+        WHEN SEC = '4' THEN
+        '40-50岁' ELSE '50岁以上'
+        END axis,
+        max( CASE WHEN GEND = '1' THEN rs ELSE 0 END ) AS manValue,
+        #男性
+        max( CASE WHEN GEND = '2' THEN rs ELSE 0 END ) AS womenValue
+        FROM
+        (
+        SELECT
+        sec,
+        gend,
+        count( 1 ) AS rs
+        FROM
+        (
+        SELECT
+        gend,
+        CASE
+        WHEN age &lt; 20 THEN '1' WHEN ( age > 20
+        AND age &lt; 30 ) THEN '2' WHEN ( age > 30
+        AND age &lt; 40 ) THEN '3' WHEN ( age > 40
+        AND age &lt; 50
+        ) THEN
+        '4' ELSE '5'
+        END AS sec
+        FROM
+        ( SELECT DISTINCT GEND, TIMESTAMPDIFF( YEAR, BRDY, CURDATE( ) ) AS age FROM psn_info_b ) t1
+        ) t2
+        GROUP BY
+        gend,
+        sec
+        ) t3
+        GROUP BY
+        sec
+    </select>
+</mapper>

@@ -36,5 +36,8 @@ public class FileUtil {
     public static void main(String[] args) {
         HashMap<String, String> map = fileToMap();
         System.out.println(map);
+        //根据code获取name
+        String name = map.get("110114");
+        System.out.println(name);
     }
 }

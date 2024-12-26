@@ -5,10 +5,7 @@ import org.springframework.stereotype.Component;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -66,5 +63,14 @@ public class DateUtil {
     public static List<Date> sortByDate(List<Date> dateList) {
         //按照日期自然顺序排序（升序）
         return dateList.stream().sorted().collect(Collectors.toList());
+    }
+
+    public static void main(String[] args) throws ParseException {
+        List<Date> dateList = new ArrayList<>();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        dateList.add(sdf.parse("2024-12-19"));
+        dateList.add(sdf.parse("2024-12-18"));
+        dateList.add(sdf.parse("2024-12-17"));
+        System.out.println(sortByDate(dateList));
     }
 }

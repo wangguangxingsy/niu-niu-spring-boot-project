@@ -4,6 +4,7 @@ package com.my.note.areacodedemo.controller;
 import com.my.note.areacodedemo.dto.AreaCodeResDTO;
 import com.my.note.areacodedemo.entity.Azx12;
 import com.my.note.areacodedemo.utils.AreaCodeUtil;
+import com.my.note.psninfodemo.PsnInfoUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -84,5 +85,13 @@ public class Azx12Controller {
         return result;
     }
 
+    @Autowired
+    private PsnInfoUtil psnInfoUtil;
+
+
+    @GetMapping("/queryAgeRange")
+    public List<?> queryAgeRange() {
+        return psnInfoUtil.queryAgeRange();
+    }
 }
 

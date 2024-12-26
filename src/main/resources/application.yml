@@ -25,3 +25,7 @@ server:
 note:
   redis:
     namespace: note
+
+# mybatis xml文件配置
+mybatis-plus:
+  mapper-locations: classpath*:/mapper/**/*.xml
