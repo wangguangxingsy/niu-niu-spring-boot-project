@@ -95,9 +95,9 @@
             <!-- 可以将不需要打进来的文件排除，引用线上配置-->
             <resource>
                 <directory>src/main/resources</directory>
-                <excludes>
-                    <exclude>**/*.properties</exclude>
-                </excludes>
+                <!--<excludes>-->
+                    <!--<exclude>**/*.properties</exclude>-->
+                <!--</excludes>-->
             </resource>
         </resources>
         <plugins>
