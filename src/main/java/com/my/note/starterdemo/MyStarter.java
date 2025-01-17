@@ -20,8 +20,8 @@ public class MyStarter implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        redisPracController.areaCodeToRedis();
-        redisPracController.areaCodeListToRedis();
+//        redisPracController.areaCodeToRedis();
+//        redisPracController.areaCodeListToRedis();
         System.out.println("行政区划缓存加载完成！");
     }
 }

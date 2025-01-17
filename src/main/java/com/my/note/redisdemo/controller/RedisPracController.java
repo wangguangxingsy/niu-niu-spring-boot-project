@@ -4,11 +4,15 @@ import com.my.note.areacodedemo.dto.AreaCodeResDTO;
 import com.my.note.areacodedemo.entity.Azx12;
 import com.my.note.areacodedemo.utils.AreaCodeUtil;
 import com.my.note.common.CommonResponse;
+import com.my.note.redisdemo.utils.RedisLockUtil;
 import com.my.note.redisdemo.utils.RedisUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.task.TaskExecutor;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -37,9 +41,52 @@ public class RedisPracController {
     @Autowired
     private AreaCodeUtil areaCodeUtil;
 
-
     @Autowired
     private RedisUtil redisUtil;
+
+    @Autowired
+    private RedisLockUtil redisLockUtil;
+
+    @Autowired
+    private ThreadPoolTaskExecutor taskExecutor;
+
+    /**
+     * redis分布锁
+     */
+    @PostMapping("/redisLockTest")
+    public void redisLockTest() {
+        //锁的键名
+        String lockKey = "test_lock_key";
+        for (int i = 0; i < 5; i++) {
+            //启动多个线程来尝试获取锁
+            taskExecutor.submit(() -> {
+                //尝试获取锁
+                String lockValue = redisLockUtil.tryLock(lockKey);
+                if (null != lockValue) {
+                    System.out.println(Thread.currentThread().getName() + "已获取到锁，并开始执行任务");
+                    //开启自动续期，避免任务还未执行完，但锁已过期
+                    redisLockUtil.autoRenewalLock(lockKey, lockValue);
+                    try {
+                        //开始执行任务，且时间超过过期时间
+                        Thread.sleep(10000);
+                        System.out.println(Thread.currentThread().getName() + "任务执行完成，此时锁的剩余过期时间为：" + redisLockUtil.getExpire(lockKey));
+
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    } finally {
+                        boolean unlock = redisLockUtil.unlock(lockKey, lockValue);
+                        if (unlock) {
+                            System.out.println(Thread.currentThread().getName() + " 成功释放锁");
+                        } else {
+                            System.out.println(Thread.currentThread().getName() + " 释放锁失败，锁已过期！。");
+                        }
+                    }
+                } else {
+                    System.out.println(Thread.currentThread().getName() + "未能获取到锁");
+                }
+            });
+        }
+    }
 
     /**
      * 从缓存获取区划代码-对象
